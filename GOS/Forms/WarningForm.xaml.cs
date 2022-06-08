@@ -4,7 +4,7 @@ namespace GOS.Forms
 {
     /// <summary>
     /// Форма с предупреждением.
-    /// Имеет публичный Label label_warningText - в него надо вносить сообщение.
+    /// Имеет публичный Label <c>label_warningText</c> - в него надо вносить сообщение.
     /// </summary>
     public partial class WarningForm
     {
@@ -19,7 +19,7 @@ namespace GOS.Forms
         /// <summary>
         /// Закрытие формы по кнопке
         /// </summary>
-        /// <param name="sender">Кто отправил сообщение</param>
+        /// <param name="sender">Кто отправил сигнал</param>
         /// <param name="e">Аргументы клика</param>
         private void Button_exit_OnClick(object sender, RoutedEventArgs e)
         {
