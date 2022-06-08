@@ -80,7 +80,7 @@ namespace GOS.WorkWithDB
         {
             var answer = new Dictionary<string, long>();
 
-            var query = $"SELECT RoleID FROM Users WHERE Email = '{email}' AND Password = '{password}'";
+            var query = $"SELECT RoleID, Active FROM Users WHERE Email = '{email}' AND Password = '{password}'";
             var command = new MySqlCommand(query, Instance._connection);
 
             using (var reader = command.ExecuteReader())
@@ -89,7 +89,8 @@ namespace GOS.WorkWithDB
                 if (reader.HasRows == false)
                     answer = null;
                 else
-                    answer[reader.GetName(0)] = reader.GetInt64(0);
+                    for (var i = 0; i < reader.FieldCount; ++i)
+                        answer[reader.GetName(i)] = reader.GetInt64(i);
             }
 
             return answer;
