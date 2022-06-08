@@ -11,6 +11,7 @@
         <Grid.RowDefinitions>
             <RowDefinition Height="3*"></RowDefinition>
             <RowDefinition Height="Auto"></RowDefinition>
+            <RowDefinition Height="Auto"></RowDefinition>
             <RowDefinition Height="1*"></RowDefinition>
         </Grid.RowDefinitions>
 
@@ -34,6 +35,16 @@
         </Grid>
 
         <Grid Grid.Row="2">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition></ColumnDefinition>
+                <ColumnDefinition></ColumnDefinition>
+            </Grid.ColumnDefinitions>
+
+            <Label x:Name="label_timeToLoginText" Content="Времени осталось (сек):" HorizontalAlignment="Right" VerticalAlignment="Center" Visibility="Hidden"></Label>
+            <Label x:Name="label_timeToLogin" Grid.Column="1" HorizontalAlignment="Left" VerticalAlignment="Center" Visibility="Hidden"></Label>
+        </Grid>
+
+        <Grid Grid.Row="3">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition></ColumnDefinition>
                 <ColumnDefinition></ColumnDefinition>

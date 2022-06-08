@@ -1,4 +1,6 @@
-﻿using System.Windows;
+﻿using System;
+using System.Windows;
+using System.Windows.Threading;
 
 using GOS.Forms;
 using GOS.WorkWithDB;
@@ -10,9 +12,34 @@ namespace GOS.forms
     /// </summary>
     public partial class AuthorizationForm
     {
+        private ushort _wrongTry;
+        private readonly DispatcherTimer _timer;
+        private ushort _timeLeft;
+
         public AuthorizationForm()
         {
             InitializeComponent();
+
+            _wrongTry = 0;
+            _timer = new DispatcherTimer
+            {
+                Interval = TimeSpan.FromSeconds(1)
+            };
+            _timer.Tick += Timer_Tick;
+        }
+
+        private void Timer_Tick(object sender, EventArgs e)
+        {
+            --_timeLeft;
+            if (_timeLeft == 0)
+            {
+                _timer.Stop();
+                label_timeToLoginText.Visibility = Visibility.Hidden;
+                label_timeToLogin.Visibility = Visibility.Hidden;
+                button_login.IsEnabled = true;
+            }
+
+            label_timeToLogin.Content = _timeLeft.ToString();
         }
 
         /// <summary>
@@ -47,6 +74,18 @@ namespace GOS.forms
                     }
                 };
                 warningForm.ShowDialog();
+
+                ++_wrongTry;
+                if (_wrongTry == 3)
+                {
+                    _wrongTry = 0;
+                    button_login.IsEnabled = false;
+                    _timeLeft = 10;
+                    label_timeToLoginText.Visibility = Visibility.Visible;
+                    label_timeToLogin.Visibility = Visibility.Visible;
+                    label_timeToLogin.Content = _timeLeft.ToString();
+                    _timer.Start();
+                }
             }
             else
             {
