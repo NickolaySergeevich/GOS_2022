@@ -103,6 +103,9 @@
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="Constants.cs" />
+    <Compile Include="Forms\AdministratorForm.xaml.cs">
+      <DependentUpon>AdministratorForm.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Forms\WarningForm.xaml.cs">
       <DependentUpon>WarningForm.xaml</DependentUpon>
     </Compile>
@@ -143,6 +146,10 @@
   </ItemGroup>
   <ItemGroup />
   <ItemGroup>
+    <Page Include="Forms\AdministratorForm.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Forms\AuthorizationForm.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
