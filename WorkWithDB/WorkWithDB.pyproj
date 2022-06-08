@@ -11,7 +11,7 @@
     <OutputPath>.</OutputPath>
     <Name>WorkWithDB</Name>
     <RootNamespace>WorkWithDB</RootNamespace>
-    <InterpreterId>MSBuild|venvWinfows|$(MSBuildProjectFullPath)</InterpreterId>
+    <InterpreterId>MSBuild|venvWindows|$(MSBuildProjectFullPath)</InterpreterId>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)' == 'Debug' ">
     <DebugSymbols>true</DebugSymbols>
@@ -25,22 +25,22 @@
     <Compile Include="WorkWithDB.py" />
   </ItemGroup>
   <ItemGroup>
-    <Interpreter Include="venvWinfows\">
-      <Id>venvWinfows</Id>
-      <Version>3.10</Version>
-      <Description>venvWinfows (Python 3.10 (64-bit))</Description>
-      <InterpreterPath>Scripts\python.exe</InterpreterPath>
-      <WindowsInterpreterPath>Scripts\pythonw.exe</WindowsInterpreterPath>
-      <PathEnvironmentVariable>PYTHONPATH</PathEnvironmentVariable>
-      <Architecture>X64</Architecture>
-    </Interpreter>
-  </ItemGroup>
-  <ItemGroup>
     <Folder Include="help_files\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="help_files\database_settings.dk" />
     <Content Include="help_files\database_settings.dk.help" />
+  </ItemGroup>
+  <ItemGroup>
+    <Interpreter Include="venvWindows\">
+      <Id>venvWindows</Id>
+      <Version>3.10</Version>
+      <Description>venvWindows (Python 3.10 (64-bit))</Description>
+      <InterpreterPath>Scripts\python.exe</InterpreterPath>
+      <WindowsInterpreterPath>Scripts\pythonw.exe</WindowsInterpreterPath>
+      <PathEnvironmentVariable>PYTHONPATH</PathEnvironmentVariable>
+      <Architecture>X64</Architecture>
+    </Interpreter>
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)\Python Tools\Microsoft.PythonTools.targets" />
   <!-- Uncomment the CoreCompile target to enable the Build command in

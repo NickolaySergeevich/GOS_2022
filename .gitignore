@@ -362,4 +362,5 @@ MigrationBackup/
 # Fody - auto-generated XML schema
 FodyWeavers.xsd
 /WorkWithDB/help_files/database_settings.dk
-/APIFlask/venvWindwos
+/APIFlask/venvWindows
+/WorkWithDB/venvWindows
