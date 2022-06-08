@@ -32,6 +32,17 @@ class DBHelper:
         DBHelper.get_instance().__connection.close()
 
     @staticmethod
+    def login_in(email: str, password: str) -> Optional[dict]:
+        query = f"select RoleID from Users where Email = '{email}' and Password = '{password}'"
+        DBHelper.get_instance().__cursor.execute(query)
+
+        data = DBHelper.get_instance().__cursor.fetchall()
+        if len(data) == 0:
+            return None
+        else:
+            return {"role_id": data[0][0]}
+
+    @staticmethod
     def read_settings_file() -> dict:
         if DBHelper.settings_file == str():
             raise FileNotFoundError
@@ -47,9 +58,10 @@ class DBHelper:
 
 
 def main() -> None:
-    # DBHelper.settings_file = "help_files/database_settings.dk"
+    DBHelper.settings_file = "help_files/database_settings.dk"
 
-    pass
+    # print(DBHelper.get_instance().login_in("asakura475@gmail.com", "23514317"))
+    # print(DBHelper.get_instance().login_in("asakura_user@gmail.com", "23514317"))
 
 
 if __name__ == "__main__":
