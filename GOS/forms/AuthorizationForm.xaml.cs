@@ -87,6 +87,17 @@ namespace GOS.forms
                     _timer.Start();
                 }
             }
+            else if (answerFromDb[Constants.ActiveKey] == Constants.ActiveNo)
+            {
+                var warningForm = new WarningForm
+                {
+                    label_warningText =
+                    {
+                        Content = "Вы неактивны в системе!"
+                    }
+                };
+                warningForm.ShowDialog();
+            }
             else
             {
                 // Тут будет открытие новой формы

@@ -102,6 +102,7 @@
       <DependentUpon>App.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="Constants.cs" />
     <Compile Include="Forms\WarningForm.xaml.cs">
       <DependentUpon>WarningForm.xaml</DependentUpon>
     </Compile>
