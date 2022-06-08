@@ -69,5 +69,21 @@ namespace GOS.WorkWithDB
 
             return answer;
         }
+
+        public Dictionary<string, long> Login(string email, string password)
+        {
+            var answer = new Dictionary<string, long>();
+
+            var query = $"SELECT RoleID FROM Users WHERE Email = '{email}' AND Password = '{password}'";
+            var command = new MySqlCommand(query, Instance._connection);
+
+            using (var reader = command.ExecuteReader())
+            {
+                reader.Read();
+                answer[reader.GetName(0)] = reader.GetInt64(0);
+            }
+
+            return answer;
+        }
     }
 }

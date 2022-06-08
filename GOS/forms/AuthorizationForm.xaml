@@ -25,8 +25,8 @@
                 <ColumnDefinition Width="1*"></ColumnDefinition>
             </Grid.ColumnDefinitions>
 
-            <Label x:Name="label_usernameText" Content="Username:" HorizontalAlignment="Right" VerticalAlignment="Center"></Label>
-            <TextBox x:Name="textBox_username" Grid.Row="0" Grid.Column="1" Margin="5" MaxLength="256"></TextBox>
+            <Label x:Name="label_emailText" Content="Username:" HorizontalAlignment="Right" VerticalAlignment="Center"></Label>
+            <TextBox x:Name="textBox_email" Grid.Row="0" Grid.Column="1" Margin="5" MaxLength="256"></TextBox>
             <Label x:Name="label_passwordText" Grid.Row="1" Grid.Column="0" Content="Password:" HorizontalAlignment="Right" VerticalAlignment="Center"></Label>
             <PasswordBox x:Name="passwordBox_password" Grid.Row="1" Grid.Column="1" Margin="5" MaxLength="256" ></PasswordBox>
         </Grid>
