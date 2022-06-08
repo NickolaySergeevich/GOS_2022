@@ -61,7 +61,7 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="forms\AuthorizationForm.xaml.cs">
+    <Compile Include="Forms\AuthorizationForm.xaml.cs">
       <DependentUpon>AuthorizationForm.xaml</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs">
@@ -89,14 +89,16 @@
   <ItemGroup>
     <None Include="App.config" />
   </ItemGroup>
-  <ItemGroup />
   <ItemGroup>
-    <Resource Include="sources\images\logo.png">
+    <Folder Include="WorkWithDB\HelpFiles\" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Sources\Images\logo.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Resource>
   </ItemGroup>
   <ItemGroup>
-    <Page Include="forms\AuthorizationForm.xaml">
+    <Page Include="Forms\AuthorizationForm.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

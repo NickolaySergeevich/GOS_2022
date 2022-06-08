@@ -12,7 +12,7 @@
             <RowDefinition Height="1*"></RowDefinition>
         </Grid.RowDefinitions>
 
-        <Image x:Name="image_logo" Margin="10" Source="../sources/images/logo.png"></Image>
+        <Image x:Name="image_logo" Margin="10" Source="../Sources/Images/logo.png"></Image>
 
         <Grid Grid.Row="1">
             <Grid.RowDefinitions>
