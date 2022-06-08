@@ -10,17 +10,16 @@ using System.Windows.Documents;
 using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
 using System.Windows.Shapes;
 
-namespace GOS
+namespace GOS.forms
 {
     /// <summary>
-    /// Логика взаимодействия для MainWindow.xaml
+    /// Логика взаимодействия для AuthorizationForm.xaml
     /// </summary>
-    public partial class MainWindow : Window
+    public partial class AuthorizationForm : Window
     {
-        public MainWindow()
+        public AuthorizationForm()
         {
             InitializeComponent();
         }
