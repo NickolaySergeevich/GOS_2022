@@ -12,10 +12,23 @@ namespace GOS.forms
     /// </summary>
     public partial class AuthorizationForm
     {
+        /// <summary>
+        /// Количество неправильных попыток входа
+        /// </summary>
         private ushort _wrongTry;
+        /// <summary>
+        /// Таймер для обратного отсчета в случае трех неудачных попыток
+        /// </summary>
         private readonly DispatcherTimer _timer;
+        /// <summary>
+        /// Количество секунд - сколько осталось для до разблокировки кнопки Login
+        /// </summary>
         private ushort _timeLeft;
 
+        /// <summary>
+        /// Конструктор
+        /// <para>Задает начальное значение необходимым полям</para>
+        /// </summary>
         public AuthorizationForm()
         {
             InitializeComponent();
@@ -28,6 +41,12 @@ namespace GOS.forms
             _timer.Tick += Timer_Tick;
         }
 
+        /// <summary>
+        /// Метод для таймера
+        /// <br>Уменьшает кол-во оставшихся секунд, а когда приходит время - останавливается</br>
+        /// </summary>
+        /// <param name="sender">Кто отправил сигнал</param>
+        /// <param name="e">Аргументы</param>
         private void Timer_Tick(object sender, EventArgs e)
         {
             --_timeLeft;
@@ -44,8 +63,9 @@ namespace GOS.forms
 
         /// <summary>
         /// Обработка входа в приложение
+        /// <br>Есть проверки на пустые поля и на неправильные данные</br>
         /// </summary>
-        /// <param name="sender">Кто отправил событие</param>
+        /// <param name="sender">Кто отправил сигнал</param>
         /// <param name="e">Аргументы</param>
         private void Button_login_OnClick(object sender, RoutedEventArgs e)
         {
@@ -107,7 +127,7 @@ namespace GOS.forms
         /// <summary>
         /// Выход из приложения
         /// </summary>
-        /// <param name="sender">Кто отправил событие</param>
+        /// <param name="sender">Кто отправил сигнал</param>
         /// <param name="e">Аргументы</param>
         private void Button_exit_OnClick(object sender, RoutedEventArgs e)
         {

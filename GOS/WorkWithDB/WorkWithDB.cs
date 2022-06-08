@@ -25,23 +25,21 @@ namespace GOS.WorkWithDB
         /// </summary>
         private const string SettingsFile = "../../WorkWithDB/HelpFiles/DatabaseSettings.dk";
 
-
         /// <summary>
         /// Для реализации паттерна singleton
         /// <br>Хранит приватный объект в единственном виде</br>
         /// </summary>
         private static WorkWithDb _instance;
-
         /// <summary>
         /// Для реализации паттерна singleton
         /// <br>Хранит публичный объект в единственном виде</br>
         /// </summary>
         public static WorkWithDb Instance => _instance ?? (_instance = new WorkWithDb(ReadSettingsFile()));
-
         /// <summary>
         /// Подключение к бд
         /// </summary>
         private readonly MySqlConnection _connection;
+
 
         /// <summary>
         /// Приватный конструктор для паттерна singleton
