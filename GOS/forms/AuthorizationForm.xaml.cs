@@ -2,10 +2,9 @@
 using System.Windows;
 using System.Windows.Threading;
 
-using GOS.Forms;
 using GOS.WorkWithDB;
 
-namespace GOS.forms
+namespace GOS.Forms
 {
     /// <summary>
     /// Форма авторизации
@@ -20,6 +19,7 @@ namespace GOS.forms
         /// Таймер для обратного отсчета в случае трех неудачных попыток
         /// </summary>
         private readonly DispatcherTimer _timer;
+
         /// <summary>
         /// Количество секунд - сколько осталось для до разблокировки кнопки Login
         /// </summary>
@@ -34,10 +34,7 @@ namespace GOS.forms
             InitializeComponent();
 
             _wrongTry = 0;
-            _timer = new DispatcherTimer
-            {
-                Interval = TimeSpan.FromSeconds(1)
-            };
+            _timer = new DispatcherTimer { Interval = TimeSpan.FromSeconds(1) };
             _timer.Tick += Timer_Tick;
         }
 
@@ -71,41 +68,25 @@ namespace GOS.forms
         {
             if (string.IsNullOrEmpty(textBox_email.Text) || string.IsNullOrEmpty(passwordBox_password.Password))
             {
-                var warningForm = new WarningForm
-                {
-                    label_warningText =
-                    {
-                        Content = "Не заполнены поля для входа!"
-                    }
-                };
-                warningForm.ShowDialog();
-
+                HelpMethods.ShowWarning("Не заполнены поля для входа");
                 return;
             }
 
             var answerFromDb = WorkWithDb.Instance.Login(textBox_email.Text, passwordBox_password.Password);
             if (answerFromDb == null)
             {
-                var warningForm = new WarningForm
-                {
-                    label_warningText =
-                    {
-                        Content = "Такого пользователя нет в бд!"
-                    }
-                };
-                warningForm.ShowDialog();
+                HelpMethods.ShowWarning("Такого пользователя нет в бд!");
 
                 ++_wrongTry;
-                if (_wrongTry == 3)
-                {
-                    _wrongTry = 0;
-                    button_login.IsEnabled = false;
-                    _timeLeft = 10;
-                    label_timeToLoginText.Visibility = Visibility.Visible;
-                    label_timeToLogin.Visibility = Visibility.Visible;
-                    label_timeToLogin.Content = _timeLeft.ToString();
-                    _timer.Start();
-                }
+                if (_wrongTry < 3)
+                    return;
+                _wrongTry = 0;
+                button_login.IsEnabled = false;
+                _timeLeft = 10;
+                label_timeToLoginText.Visibility = Visibility.Visible;
+                label_timeToLogin.Visibility = Visibility.Visible;
+                label_timeToLogin.Content = _timeLeft.ToString();
+                _timer.Start();
             }
             else if (answerFromDb[Constants.ActiveKey] == Constants.ActiveNo)
             {
