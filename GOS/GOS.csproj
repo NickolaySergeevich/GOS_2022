@@ -85,13 +85,13 @@
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
     </None>
+    <None Include="WorkWithDB\HelpFiles\database_settings.dk" />
+    <None Include="WorkWithDB\HelpFiles\database_settings.dk.help" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="WorkWithDB\HelpFiles\" />
-  </ItemGroup>
+  <ItemGroup />
   <ItemGroup>
     <Resource Include="Sources\Images\logo.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
