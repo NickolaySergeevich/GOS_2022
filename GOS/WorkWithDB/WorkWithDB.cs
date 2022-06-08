@@ -70,6 +70,12 @@ namespace GOS.WorkWithDB
             return answer;
         }
 
+        /// <summary>
+        /// Вход в систему
+        /// </summary>
+        /// <param name="email">Email пользователя</param>
+        /// <param name="password">Пароль пользователя</param>
+        /// <returns>Словарь с RoleID пользователя или null</returns>
         public Dictionary<string, long> Login(string email, string password)
         {
             var answer = new Dictionary<string, long>();
@@ -80,7 +86,10 @@ namespace GOS.WorkWithDB
             using (var reader = command.ExecuteReader())
             {
                 reader.Read();
-                answer[reader.GetName(0)] = reader.GetInt64(0);
+                if (reader.HasRows == false)
+                    answer = null;
+                else
+                    answer[reader.GetName(0)] = reader.GetInt64(0);
             }
 
             return answer;
