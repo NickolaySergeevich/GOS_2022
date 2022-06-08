@@ -90,7 +90,7 @@ namespace GOS.WorkWithDB
         {
             var answer = new Dictionary<string, long>();
 
-            var query = $"SELECT RoleID, Active FROM Users WHERE Email = '{email}' AND Password = '{password}'";
+            var query = $"SELECT RoleID, Active FROM users WHERE Email = '{email}' AND Password = '{password}'";
             var command = new MySqlCommand(query, Instance._connection);
 
             using (var reader = command.ExecuteReader())
