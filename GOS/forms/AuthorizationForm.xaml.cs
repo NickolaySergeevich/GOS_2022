@@ -1,5 +1,4 @@
-﻿using System.Diagnostics;
-using System.Windows;
+﻿using System.Windows;
 
 using GOS.Forms;
 using GOS.WorkWithDB;
@@ -37,7 +36,22 @@ namespace GOS.forms
                 return;
             }
 
-            Debug.WriteLine("\tMESSAGE {0}", WorkWithDb.Instance.Login(textBox_email.Text, passwordBox_password.Password)["RoleID"]);
+            var answerFromDb = WorkWithDb.Instance.Login(textBox_email.Text, passwordBox_password.Password);
+            if (answerFromDb == null)
+            {
+                var warningForm = new WarningForm
+                {
+                    label_warningText =
+                    {
+                        Content = "Такого пользователя нет в бд!"
+                    }
+                };
+                warningForm.ShowDialog();
+            }
+            else
+            {
+                // Тут будет открытие новой формы
+            }
         }
 
         /// <summary>
