@@ -5,6 +5,8 @@ VisualStudioVersion = 17.2.32526.322
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GOS", "GOS\GOS.csproj", "{599C9A26-0ABD-4A66-9561-888827906194}"
 EndProject
+Project("{888888A0-9F3D-457C-B088-3A5042F75D52}") = "WorkWithDB", "WorkWithDB\WorkWithDB.pyproj", "{19D3C5AB-C292-4F72-A6D1-3E6F51388A42}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -15,6 +17,8 @@ Global
 		{599C9A26-0ABD-4A66-9561-888827906194}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{599C9A26-0ABD-4A66-9561-888827906194}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{599C9A26-0ABD-4A66-9561-888827906194}.Release|Any CPU.Build.0 = Release|Any CPU
+		{19D3C5AB-C292-4F72-A6D1-3E6F51388A42}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{19D3C5AB-C292-4F72-A6D1-3E6F51388A42}.Release|Any CPU.ActiveCfg = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
