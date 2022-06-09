@@ -68,6 +68,8 @@ namespace GOS.Forms
 
             comboBox_offices.Items.Add("All offices");
             comboBox_offices.SelectedIndex = 0;
+            foreach (var officeName in WorkWithDb.Instance.GetAllOfficesForAdmin())
+                comboBox_offices.Items.Add(officeName);
         }
     }
 }
