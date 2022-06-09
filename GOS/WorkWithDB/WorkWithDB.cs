@@ -237,6 +237,11 @@ namespace GOS.WorkWithDB
             }
         }
 
+        /// <summary>
+        /// Получение имени пользователя по почте
+        /// </summary>
+        /// <param name="email">Почта пользователя</param>
+        /// <returns>Имя пользователя или null</returns>
         public string GetNameUserByEmail(string email)
         {
             var query = $"SELECT FirstName FROM users WHERE Email = '{email}'";
@@ -250,6 +255,45 @@ namespace GOS.WorkWithDB
                 reader.Read();
                 return reader.GetString(0);
             }
+        }
+
+        /// <summary>
+        /// Находит все логи пользователя по почте
+        /// </summary>
+        /// <param name="email">Почта пользователя</param>
+        /// <returns>Список с логами или null</returns>
+        public List<UserLog> GetLogsForUserByEmail(string email)
+        {
+            var answer = new List<UserLog>();
+
+            var query = "SELECT Date, LoginTime, LogoutTime, TimeSpent, UnsuccessfulLogoutReason " +
+                        "FROM logs " +
+                        $"LEFT JOIN users ON users.Email = '{email}' " +
+                        "WHERE UserID = users.ID";
+            var command = new MySqlCommand(query, Instance._connection);
+
+            using (var reader = command.ExecuteReader())
+            {
+                if (reader.HasRows == false)
+                    return null;
+
+                while (reader.Read())
+                {
+                    var log = new UserLog
+                    {
+                        Date = reader.GetDateTime(0),
+                        LoginTime = reader.GetDateTime(1),
+                        LogoutTime = reader.GetDateTime(2),
+                        TimeSpent = reader.GetString(3),
+                        UnsuccessfulLogoutReason = reader.GetString(4),
+                        BackColor = reader.GetString(4) == null ? "White" : "Red"
+                    };
+
+                    answer.Add(log);
+                }
+            }
+
+            return answer;
         }
     }
 }
