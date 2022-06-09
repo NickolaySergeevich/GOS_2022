@@ -83,6 +83,18 @@ namespace GOS.Forms
         }
 
         /// <summary>
+        /// Возвращение к окну авторизации
+        /// </summary>
+        /// <param name="sender">Кто отправил сигнал</param>
+        /// <param name="e">Аргументы</param>
+        private void MenuItem_OnClick(object sender, RoutedEventArgs e)
+        {
+            var form = new AuthorizationForm();
+            form.Show();
+            Close();
+        }
+
+        /// <summary>
         /// Обновление списка пользователей при выборе нового офиса
         /// </summary>
         /// <param name="sender">Кто отправил сигнал</param>

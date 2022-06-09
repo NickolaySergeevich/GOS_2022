@@ -18,7 +18,7 @@
 
         <Menu>
             <MenuItem Header="Add user"></MenuItem>
-            <MenuItem Header="Exit"></MenuItem>
+            <MenuItem Header="Exit" Click="MenuItem_OnClick"></MenuItem>
         </Menu>
 
         <Grid Grid.Row="1" Margin="10, 5">
