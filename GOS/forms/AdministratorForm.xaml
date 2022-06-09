@@ -56,7 +56,7 @@
             <Border Grid.Column="5" BorderThickness="1" BorderBrush="Black"></Border>
         </Grid>
 
-        <ListBox x:Name="listBox_users" Grid.Row="3" HorizontalContentAlignment="Stretch" VerticalContentAlignment="Stretch" Margin="10, 0, 10, 0" BorderBrush="{x:Null}">
+        <ListBox x:Name="listBox_users" Grid.Row="3" HorizontalContentAlignment="Stretch" VerticalContentAlignment="Stretch" Margin="10, 0, 10, 0" BorderBrush="{x:Null}" SelectionMode="Single">
             <ListBox.ItemContainerStyle>
                 <Style TargetType="ListBoxItem">
                     <Setter Property="Padding" Value="0"></Setter>
@@ -99,7 +99,7 @@
             </Grid.ColumnDefinitions>
 
             <Button x:Name="button_changeRole" Content="Change Role" Padding="5" Margin="10"></Button>
-            <Button x:Name="button_enableOrDisableLogin" Grid.Column="1" Content="Enable/Disable Login" Padding="5" Margin="10"></Button>
+            <Button x:Name="button_enableOrDisableLogin" Grid.Column="1" Content="Enable/Disable Login" Padding="5" Margin="10" Click="Button_enableOrDisableLogin_OnClick"></Button>
         </Grid>
     </Grid>
 </Window>

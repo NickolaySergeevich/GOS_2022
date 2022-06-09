@@ -1,4 +1,5 @@
 ﻿using System.Linq;
+using System.Windows;
 using System.Windows.Controls;
 
 using GOS.WorkWithDB;
@@ -60,16 +61,6 @@ namespace GOS.Forms
         }
 
         /// <summary>
-        /// Обновление списка пользователей при выборе нового офиса
-        /// </summary>
-        /// <param name="sender">Кто отправил сигнал</param>
-        /// <param name="e">Аргументы</param>
-        private void ComboBox_offices_OnSelectionChanged(object sender, SelectionChangedEventArgs e)
-        {
-            ReloadListBoxUsers();
-        }
-
-        /// <summary>
         /// Обновляет список пользователей
         /// </summary>
         private void ReloadListBoxUsers()
@@ -89,6 +80,33 @@ namespace GOS.Forms
             })
                 .ToList();
             listBox_users.ItemsSource = usersItems;
+        }
+
+        /// <summary>
+        /// Обновление списка пользователей при выборе нового офиса
+        /// </summary>
+        /// <param name="sender">Кто отправил сигнал</param>
+        /// <param name="e">Аргументы</param>
+        private void ComboBox_offices_OnSelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            ReloadListBoxUsers();
+        }
+
+        /// <summary>
+        /// Изменяет значение - заблокирован ли пользователь или нет
+        /// </summary>
+        /// <param name="sender">Кто отправил сигнал</param>
+        /// <param name="e">Аргументы</param>
+        private void Button_enableOrDisableLogin_OnClick(object sender, RoutedEventArgs e)
+        {
+            if (listBox_users.SelectedItem == null)
+            {
+                HelpMethods.ShowWarning("Вы не выбрали пользователя");
+                return;
+            }
+
+            WorkWithDb.Instance.UpdateActiveForUser(((UserItem)listBox_users.SelectedItem).EmailAddress);
+            ReloadListBoxUsers();
         }
     }
 }
