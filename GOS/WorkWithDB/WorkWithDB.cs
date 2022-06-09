@@ -95,12 +95,45 @@ namespace GOS.WorkWithDB
 
             using (var reader = command.ExecuteReader())
             {
-                reader.Read();
                 if (reader.HasRows == false)
-                    answer = null;
-                else
+                    return null;
+
+                reader.Read();
+                for (var i = 0; i < reader.FieldCount; ++i)
+                    answer[reader.GetName(i)] = reader.GetInt64(i);
+            }
+
+            return answer;
+        }
+
+        /// <summary>
+        /// Создает необходимы для администратора список пользователей
+        /// </summary>
+        /// <returns>Список с пользователями или null</returns>
+        public List<Dictionary<string, string>> GetAllUsersForAdmin()
+        {
+            var answer = new List<Dictionary<string, string>>();
+
+            const string query = "select " +
+                                 "users.FirstName as Name, users.LastName as LastName, " +
+                                 "year(current_timestamp) - year(users.Birthdate) - (right(current_timestamp, 5) < right(users.Birthdate, 5)) as Age, " +
+                                 "roles.Title as UserRole, users.Email as EmailAddress, offices.Title as Office, users.Active as Active " +
+                                 "from users " +
+                                 "left join roles on users.RoleID = roles.ID " +
+                                 "left join offices on users.OfficeID = offices.ID";
+            var command = new MySqlCommand(query, Instance._connection);
+
+            using (var reader = command.ExecuteReader())
+            {
+                if (reader.HasRows == false)
+                    return null;
+
+                while (reader.Read())
+                {
+                    answer.Add(new Dictionary<string, string>());
                     for (var i = 0; i < reader.FieldCount; ++i)
-                        answer[reader.GetName(i)] = reader.GetInt64(i);
+                        answer[answer.Count - 1][reader.GetName(i)] = reader.GetString(i);
+                }
             }
 
             return answer;
