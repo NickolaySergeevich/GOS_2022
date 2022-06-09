@@ -114,13 +114,13 @@ namespace GOS.WorkWithDB
         {
             var answer = new List<Dictionary<string, string>>();
 
-            const string query = "select " +
-                                 "users.FirstName as Name, users.LastName as LastName, " +
-                                 "year(current_timestamp) - year(users.Birthdate) - (right(current_timestamp, 5) < right(users.Birthdate, 5)) as Age, " +
-                                 "roles.Title as UserRole, users.Email as EmailAddress, offices.Title as Office, users.Active as Active " +
-                                 "from users " +
-                                 "left join roles on users.RoleID = roles.ID " +
-                                 "left join offices on users.OfficeID = offices.ID";
+            const string query = "SELECT " +
+                                 "users.FirstName AS Name, users.LastName AS LastName, " +
+                                 "year(current_timestamp) - year(users.Birthdate) - (right(current_timestamp, 5) < right(users.Birthdate, 5)) AS Age, " +
+                                 "roles.Title AS UserRole, users.Email AS EmailAddress, offices.Title AS Office, users.Active AS Active " +
+                                 "FROM users " +
+                                 "LEFT JOIN roles ON users.RoleID = roles.ID " +
+                                 "LEFT JOIN offices ON users.OfficeID = offices.ID";
             var command = new MySqlCommand(query, Instance._connection);
 
             using (var reader = command.ExecuteReader())
@@ -134,6 +134,29 @@ namespace GOS.WorkWithDB
                     for (var i = 0; i < reader.FieldCount; ++i)
                         answer[answer.Count - 1][reader.GetName(i)] = reader.GetString(i);
                 }
+            }
+
+            return answer;
+        }
+
+        /// <summary>
+        /// Создает список всех офисов для администратора
+        /// </summary>
+        /// <returns>Список с названиями всех офисов</returns>
+        public List<string> GetAllOfficesForAdmin()
+        {
+            var answer = new List<string>();
+
+            const string query = "SELECT Title FROM offices";
+            var command = new MySqlCommand(query, Instance._connection);
+
+            using (var reader = command.ExecuteReader())
+            {
+                if (reader.HasRows == false)
+                    return null;
+
+                while (reader.Read())
+                    answer.Add(reader.GetString(0));
             }
 
             return answer;
