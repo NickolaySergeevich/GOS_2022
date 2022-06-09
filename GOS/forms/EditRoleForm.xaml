@@ -30,11 +30,11 @@
             </Grid.ColumnDefinitions>
 
             <Label x:Name="label_emailAddressText" Grid.Row="0" Grid.Column="1" Content="Email address" HorizontalAlignment="Left" VerticalAlignment="Center"></Label>
-            <TextBox x:Name="textBox_emailAddress" Grid.Row="0" Grid.Column="2" HorizontalAlignment="Stretch" VerticalAlignment="Center"></TextBox>
+            <TextBox x:Name="textBox_emailAddress" Grid.Row="0" Grid.Column="2" HorizontalAlignment="Stretch" VerticalAlignment="Center" MaxLength="150"></TextBox>
             <Label x:Name="label_firstNameText" Grid.Row="1" Grid.Column="1" Content="First name" HorizontalAlignment="Left" VerticalAlignment="Center"></Label>
-            <TextBox x:Name="textBox_firstName" Grid.Row="1" Grid.Column="2" HorizontalAlignment="Stretch" VerticalAlignment="Center"></TextBox>
+            <TextBox x:Name="textBox_firstName" Grid.Row="1" Grid.Column="2" HorizontalAlignment="Stretch" VerticalAlignment="Center" MaxLength="50"></TextBox>
             <Label x:Name="label_lastNameText" Grid.Row="2" Grid.Column="1" Content="Last name" HorizontalAlignment="Left" VerticalAlignment="Center"></Label>
-            <TextBox x:Name="textBox_lastName" Grid.Row="2" Grid.Column="2" HorizontalAlignment="Stretch" VerticalAlignment="Center"></TextBox>
+            <TextBox x:Name="textBox_lastName" Grid.Row="2" Grid.Column="2" HorizontalAlignment="Stretch" VerticalAlignment="Center" MaxLength="50"></TextBox>
             <Label x:Name="label_officeText" Grid.Row="3" Grid.Column="1" Content="Office" HorizontalAlignment="Left" VerticalAlignment="Center"></Label>
             <ComboBox x:Name="comboBox_offices" Grid.Row="3" Grid.Column="2" HorizontalAlignment="Stretch" VerticalAlignment="Center"></ComboBox>
             <Label x:Name="label_roleText" Grid.Row="4" Grid.Column="1" Content="Role" HorizontalAlignment="Left" VerticalAlignment="Center"></Label>
@@ -52,7 +52,7 @@
             </Grid.ColumnDefinitions>
 
             <Button x:Name="button_apply" Content="Apply" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="10" Padding="5" Width="80" Click="Button_apply_OnClick"></Button>
-            <Button x:Name="button_cancel" Grid.Column="1" Content="Cancel" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="10" Padding="5" Width="80" Click="Button_cancel_OnClick"></Button>
+            <Button x:Name="button_cancel" Grid.Column="1" Content="Cancel" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="10" Padding="5" Width="80" Background="LightCoral" Click="Button_cancel_OnClick"></Button>
         </Grid>
     </Grid>
 </Window>

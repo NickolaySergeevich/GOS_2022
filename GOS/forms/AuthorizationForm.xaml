@@ -30,9 +30,9 @@
             </Grid.ColumnDefinitions>
 
             <Label x:Name="label_emailText" Content="Username:" HorizontalAlignment="Right" VerticalAlignment="Center"></Label>
-            <TextBox x:Name="textBox_email" Grid.Row="0" Grid.Column="1" Margin="5" MaxLength="256"></TextBox>
+            <TextBox x:Name="textBox_email" Grid.Row="0" Grid.Column="1" Margin="5" MaxLength="150"></TextBox>
             <Label x:Name="label_passwordText" Grid.Row="1" Grid.Column="0" Content="Password:" HorizontalAlignment="Right" VerticalAlignment="Center"></Label>
-            <PasswordBox x:Name="passwordBox_password" Grid.Row="1" Grid.Column="1" Margin="5" MaxLength="256" ></PasswordBox>
+            <PasswordBox x:Name="passwordBox_password" Grid.Row="1" Grid.Column="1" Margin="5" MaxLength="50"></PasswordBox>
         </Grid>
 
         <Grid Grid.Row="2">
