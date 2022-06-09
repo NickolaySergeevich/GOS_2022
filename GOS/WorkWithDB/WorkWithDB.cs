@@ -176,14 +176,34 @@ namespace GOS.WorkWithDB
             command.ExecuteNonQuery();
         }
 
-        public void InsertUserIntoDb(string email, string firstName, string lastName, string officeName,
+        /// <summary>
+        /// Добавляет пользователя в бд
+        /// </summary>
+        /// <param name="email">Почта пользователя</param>
+        /// <param name="firstName">Имя пользователя</param>
+        /// <param name="lastName">Фамилия пользователя</param>
+        /// <param name="officeName">В каком офисе пользователь</param>
+        /// <param name="birthdate">Дата рождения пользователя</param>
+        /// <param name="password">Пароль пользователя</param>
+        /// <returns></returns>
+        public bool InsertUserIntoDb(string email, string firstName, string lastName, string officeName,
             string birthdate, string password)
         {
-            var query = "INSERT INTO users (RoleID, Email, Password, FirstName, LastName, OfficeID, Birthdate, Active) " +
-                        $"SELECT 1, '{email}', '{password}', '{firstName}', '{lastName}', offices.ID, '{birthdate}', 1 " +
-                        $"FROM offices WHERE offices.Title = '{officeName}'";
-            var command = new MySqlCommand(query, Instance._connection);
-            command.ExecuteNonQuery();
+            try
+            {
+                var query =
+                    "INSERT INTO users (RoleID, Email, Password, FirstName, LastName, OfficeID, Birthdate, Active) " +
+                    $"SELECT 2, '{email}', '{password}', '{firstName}', '{lastName}', offices.ID, '{birthdate}', 1 " +
+                    $"FROM offices WHERE offices.Title = '{officeName}'";
+                var command = new MySqlCommand(query, Instance._connection);
+                command.ExecuteNonQuery();
+
+                return true;
+            }
+            catch (MySqlException)
+            {
+                return false;
+            }
         }
     }
 }
