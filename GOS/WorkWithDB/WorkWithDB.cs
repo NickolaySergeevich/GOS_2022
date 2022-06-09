@@ -305,11 +305,14 @@ namespace GOS.WorkWithDB
         /// <returns>Успешно ли</returns>
         public bool InsertLogForUserByEmail(DateTime loginTime, string email)
         {
+            var correctLoginDate =
+                $"{loginTime.Year}-{loginTime.Month}-{loginTime.Day} {loginTime.Hour}:{loginTime.Minute}:{loginTime.Second}";
+
             try
             {
                 var query =
                     "INSERT INTO logs (UserID, LoginTime, LogoutTime, TimeSpent) " +
-                    $"SELECT users.ID, {loginTime}, CURRENT_TIMESTAMP, TIMESTAMPDIFF(second, {loginTime}, current_timestamp) " +
+                    $"SELECT users.ID, '{correctLoginDate}', CURRENT_TIMESTAMP, TIMESTAMPDIFF(second, '{correctLoginDate}', current_timestamp) " +
                     $"FROM users WHERE users.Email = '{email}'";
                 var command = new MySqlCommand(query, Instance._connection);
                 command.ExecuteNonQuery();
