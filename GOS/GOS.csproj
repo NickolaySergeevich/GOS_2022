@@ -115,6 +115,7 @@
     <Compile Include="Forms\WarningForm.xaml.cs">
       <DependentUpon>WarningForm.xaml</DependentUpon>
     </Compile>
+    <Compile Include="HelpClasses.cs" />
     <Compile Include="HelpMethods.cs" />
     <Compile Include="WorkWithDB\WorkWithDB.cs" />
   </ItemGroup>
