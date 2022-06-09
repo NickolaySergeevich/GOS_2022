@@ -185,7 +185,7 @@ namespace GOS.WorkWithDB
         /// <param name="officeName">В каком офисе пользователь</param>
         /// <param name="birthdate">Дата рождения пользователя</param>
         /// <param name="password">Пароль пользователя</param>
-        /// <returns></returns>
+        /// <returns>Успешно был ли добавлен пользователь</returns>
         public bool InsertUserIntoDb(string email, string firstName, string lastName, string officeName,
             string birthdate, string password)
         {
@@ -195,6 +195,37 @@ namespace GOS.WorkWithDB
                     "INSERT INTO users (RoleID, Email, Password, FirstName, LastName, OfficeID, Birthdate, Active) " +
                     $"SELECT 2, '{email}', '{password}', '{firstName}', '{lastName}', offices.ID, '{birthdate}', 1 " +
                     $"FROM offices WHERE offices.Title = '{officeName}'";
+                var command = new MySqlCommand(query, Instance._connection);
+                command.ExecuteNonQuery();
+
+                return true;
+            }
+            catch (MySqlException)
+            {
+                return false;
+            }
+        }
+
+        /// <summary>
+        /// Обновляет данные пользователя
+        /// </summary>
+        /// <param name="email">Новая почта пользователя</param>
+        /// <param name="firstName">Новое имя пользователя</param>
+        /// <param name="lastName">Новая фамилия пользователя</param>
+        /// <param name="officeName">Новый офис пользователя</param>
+        /// <param name="roleName">Новая роль пользователя</param>
+        /// <param name="oldEmail">Старая почта пользователя</param>
+        /// <returns>Успешно ли были внесены изменения</returns>
+        public bool UpdateUserInformation(string email, string firstName, string lastName, string officeName,
+            string roleName, string oldEmail)
+        {
+            try
+            {
+                var query = "UPDATE users " +
+                            $"INNER JOIN offices ON offices.Title = '{officeName}' " +
+                            $"INNER JOIN roles ON roles.Title = '{roleName}' " +
+                            $"SET users.Email = '{email}', users.FirstName = '{firstName}', users.LastName = '{lastName}', users.OfficeID = offices.ID, users.RoleID = roles.ID " +
+                            $"WHERE users.Email = '{oldEmail}'";
                 var command = new MySqlCommand(query, Instance._connection);
                 command.ExecuteNonQuery();
 
