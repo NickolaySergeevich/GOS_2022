@@ -34,16 +34,22 @@ namespace GOS.Forms
                 return;
             }
 
-            WorkWithDb.Instance.InsertUserIntoDb(textBox_email.Text, textBox_firstName.Text, textBox_lastName.Text,
-                comboBox_offices.SelectedItem.ToString(), datePicker_birthdate.Text, passwordBox_password.Password);
+            var splitDate = datePicker_birthdate.Text.Split('.');
+            var correctDate = splitDate[2] + "-" + splitDate[1] + "-" + splitDate[0];
 
-            textBox_email.Text = string.Empty;
-            textBox_firstName.Text = string.Empty;
-            textBox_lastName.Text = string.Empty;
-            datePicker_birthdate.Text = string.Empty;
-            passwordBox_password.Password = string.Empty;
+            if (WorkWithDb.Instance.InsertUserIntoDb(textBox_email.Text, textBox_firstName.Text, textBox_lastName.Text,
+                    comboBox_offices.SelectedItem.ToString(), correctDate, passwordBox_password.Password))
+            {
+                textBox_email.Text = string.Empty;
+                textBox_firstName.Text = string.Empty;
+                textBox_lastName.Text = string.Empty;
+                datePicker_birthdate.Text = string.Empty;
+                passwordBox_password.Password = string.Empty;
 
-            HelpMethods.ShowMessage("Пользователь успешно добавлен в бд!");
+                HelpMethods.ShowMessage("Пользователь успешно добавлен в бд!");
+            }
+            else
+                HelpMethods.ShowWarning("Такой email уже есть в бд!");
         }
 
         /// <summary>
