@@ -1,4 +1,4 @@
-﻿using System.Collections.Generic;
+﻿using System.Linq;
 
 using GOS.WorkWithDB;
 
@@ -46,15 +46,14 @@ namespace GOS.Forms
     {
         /// <summary>
         /// Конструктор - здесь создается список пользователей и прикрепляется к <c>ListBox</c>
+        /// <br>Также создается список офисов</br>
         /// </summary>
         public AdministratorForm()
         {
             InitializeComponent();
 
-            var userItems = new List<UserItem>();
-            foreach (var user in WorkWithDb.Instance.GetAllUsersForAdmin())
-            {
-                var userItem = new UserItem
+            var userItems = WorkWithDb.Instance.GetAllUsersForAdmin()
+                .Select(user => new UserItem
                 {
                     Name = user["Name"],
                     LastName = user["LastName"],
@@ -63,12 +62,12 @@ namespace GOS.Forms
                     EmailAddress = user["EmailAddress"],
                     Office = user["Office"],
                     BackColor = user["Active"] == "False" ? "Red" : "White"
-                };
-
-                userItems.Add(userItem);
-            }
-
+                })
+                .ToList();
             listBox_users.ItemsSource = userItems;
+
+            comboBox_offices.Items.Add("All offices");
+            comboBox_offices.SelectedIndex = 0;
         }
     }
 }
