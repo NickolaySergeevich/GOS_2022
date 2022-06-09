@@ -20,17 +20,17 @@
             <MenuItem Header="Exit"></MenuItem>
         </Menu>
 
-        <Grid Grid.Row="1">
+        <Grid Grid.Row="1" Margin="10, 5">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="Auto"></ColumnDefinition>
                 <ColumnDefinition></ColumnDefinition>
             </Grid.ColumnDefinitions>
 
-            <Label x:Name="label_officeText" Content="Office:" HorizontalAlignment="Right" VerticalAlignment="Center" Margin="10, 5, 0, 5"></Label>
+            <Label x:Name="label_officeText" Content="Office:" HorizontalAlignment="Right" VerticalAlignment="Center"></Label>
             <ComboBox x:Name="comboBox_offices" Grid.Column="1" HorizontalAlignment="Left" VerticalAlignment="Center" Width="256"></ComboBox>
         </Grid>
 
-        <Border Grid.Row="2" BorderThickness="1" BorderBrush="Black" Margin="10">
+        <Border Grid.Row="2" BorderThickness="1" BorderBrush="Black" Margin="10, 0, 10, 10">
             <ListBox x:Name="listBox_users" HorizontalContentAlignment="Stretch">
                 <ListBox.Template>
                     <ControlTemplate>
