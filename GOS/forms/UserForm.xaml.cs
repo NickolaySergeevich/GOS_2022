@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Linq;
 using System.Windows;
 
 using GOS.WorkWithDB;
@@ -35,7 +36,9 @@ namespace GOS.Forms
 
             label_hello.Content = $"Hi, {WorkWithDb.Instance.GetNameUserByEmail(_email)}, Welcome to AMONIC Airlines";
 
-            listBox_logs.ItemsSource = WorkWithDb.Instance.GetLogsForUserByEmail(_email);
+            var logs = WorkWithDb.Instance.GetLogsForUserByEmail(_email);
+            listBox_logs.ItemsSource = logs;
+            label_numberOfCrushes.Content = logs.Count(elem => elem.UnsuccessfulLogoutReason != "-").ToString();
         }
 
         /// <summary>
