@@ -79,7 +79,7 @@
                         <Label x:Name="label_date" Content="{Binding Date}" Background="{Binding BackColor}"></Label>
                         <Label x:Name="label_loginTime" Grid.Column="1" Content="{Binding LoginTime}" Background="{Binding BackColor}"></Label>
                         <Label x:Name="label_logoutTime" Grid.Column="2" Content="{Binding LogoutTime}" Background="{Binding BackColor}"></Label>
-                        <Label x:Name="label_timeSpentOnSystem" Grid.Column="3" Content="{Binding TimeSpentOnSystem}" Background="{Binding BackColor}"></Label>
+                        <Label x:Name="label_timeSpentOnSystem" Grid.Column="3" Content="{Binding TimeSpent}" Background="{Binding BackColor}"></Label>
                         <Label x:Name="label_unsuccessfulLogoutReason" Grid.Column="4" Content="{Binding UnsuccessfulLogoutReason}" Background="{Binding BackColor}"></Label>
 
                         <Border Grid.Column="0" BorderThickness="1" BorderBrush="Black"></Border>

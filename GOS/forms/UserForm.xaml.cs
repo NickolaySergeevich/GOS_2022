@@ -16,6 +16,8 @@ namespace GOS.Forms
 
         /// <summary>
         /// Конструктор
+        /// <br>Создает сообщение, приветствующее пользователя</br>
+        /// <br>Заполняет таблицу логов</br>
         /// </summary>
         /// <param name="email">Почта пользователя</param>
         public UserForm(string email)
@@ -25,6 +27,8 @@ namespace GOS.Forms
             _email = email;
 
             label_hello.Content = $"Hi, {WorkWithDb.Instance.GetNameUserByEmail(_email)}, Welcome to AMONIC Airlines";
+
+            listBox_logs.ItemsSource = WorkWithDb.Instance.GetLogsForUserByEmail(_email);
         }
 
         /// <summary>

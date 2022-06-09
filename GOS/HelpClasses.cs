@@ -55,6 +55,7 @@ namespace GOS
         /// </summary>
         public DateTime LogoutTime { get; set; }
 
+        private string _timeSpent;
         /// <summary>
         /// Время, потраченное пользователем в системе, в секундах
         /// </summary>
@@ -62,14 +63,14 @@ namespace GOS
         {
             get
             {
-                var allSeconds = Convert.ToInt64(TimeSpent);
+                var allSeconds = Convert.ToInt64(_timeSpent);
                 var seconds = allSeconds % 60;
                 var minutes = allSeconds / 60 % 60;
                 var hours = allSeconds / 3600;
 
-                return String.Format("{0:00}:{0:00}:{0:00}", hours, minutes, seconds);
+                return $"{hours:00}:{minutes:00}:{seconds:00}";
             }
-            set => TimeSpent = value;
+            set => _timeSpent = value;
         }
         /// <summary>
         /// Причина неудачного выхода из системы

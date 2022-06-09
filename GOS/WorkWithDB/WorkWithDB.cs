@@ -286,7 +286,7 @@ namespace GOS.WorkWithDB
                         LogoutTime = reader.GetDateTime(2),
                         TimeSpent = reader.GetString(3),
                         UnsuccessfulLogoutReason = reader.GetString(4),
-                        BackColor = reader.GetString(4) == null ? "White" : "Red"
+                        BackColor = reader.GetString(4) == "-" ? "White" : "Red"
                     };
 
                     answer.Add(log);
