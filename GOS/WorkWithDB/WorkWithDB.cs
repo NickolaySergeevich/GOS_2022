@@ -109,18 +109,21 @@ namespace GOS.WorkWithDB
         /// <summary>
         /// Создает необходимы для администратора список пользователей
         /// </summary>
+        /// <param name="officeName">Офис, в котором нужно найти пользователей</param>
         /// <returns>Список с пользователями или null</returns>
-        public List<Dictionary<string, string>> GetAllUsersForAdmin()
+        public List<Dictionary<string, string>> GetOfficeUsersForAdmin(string officeName)
         {
             var answer = new List<Dictionary<string, string>>();
 
-            const string query = "SELECT " +
-                                 "users.FirstName AS Name, users.LastName AS LastName, " +
-                                 "year(current_timestamp) - year(users.Birthdate) - (right(current_timestamp, 5) < right(users.Birthdate, 5)) AS Age, " +
-                                 "roles.Title AS UserRole, users.Email AS EmailAddress, offices.Title AS Office, users.Active AS Active " +
-                                 "FROM users " +
-                                 "LEFT JOIN roles ON users.RoleID = roles.ID " +
-                                 "LEFT JOIN offices ON users.OfficeID = offices.ID";
+            var query = "SELECT " +
+                        "users.FirstName AS Name, users.LastName AS LastName, " +
+                        "year(current_timestamp) - year(users.Birthdate) - (right(current_timestamp, 5) < right(users.Birthdate, 5)) AS Age, " +
+                        "roles.Title AS UserRole, users.Email AS EmailAddress, offices.Title AS Office, users.Active AS Active " +
+                        "FROM users " +
+                        "LEFT JOIN roles ON users.RoleID = roles.ID " +
+                        "LEFT JOIN offices ON users.OfficeID = offices.ID";
+            if (officeName != "All offices")
+                query += $" WHERE offices.Title = '{officeName}'";
             var command = new MySqlCommand(query, Instance._connection);
 
             using (var reader = command.ExecuteReader())

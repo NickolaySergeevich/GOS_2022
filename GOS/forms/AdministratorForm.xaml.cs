@@ -52,7 +52,7 @@ namespace GOS.Forms
         {
             InitializeComponent();
 
-            var userItems = WorkWithDb.Instance.GetAllUsersForAdmin()
+            var userItems = WorkWithDb.Instance.GetOfficeUsersForAdmin()
                 .Select(user => new UserItem
                 {
                     Name = user["Name"],
