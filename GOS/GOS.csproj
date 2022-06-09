@@ -115,6 +115,9 @@
     <Compile Include="Forms\MessageForm.xaml.cs">
       <DependentUpon>MessageForm.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Forms\UserForm.xaml.cs">
+      <DependentUpon>UserForm.xaml</DependentUpon>
+    </Compile>
     <Compile Include="HelpClasses.cs" />
     <Compile Include="HelpMethods.cs" />
     <Compile Include="WorkWithDB\WorkWithDB.cs" />
@@ -170,6 +173,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Forms\MessageForm.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Forms\UserForm.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
