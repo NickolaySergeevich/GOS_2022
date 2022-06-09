@@ -23,7 +23,7 @@
 
         <Label x:Name="label_hello" Grid.Row="1" Content="Hi UserName, Welcome to AMONIC Airlines" Margin="10" HorizontalAlignment="Left" VerticalAlignment="Center"></Label>
 
-        <Grid Grid.Row="2" HorizontalAlignment="Left">
+        <Grid Grid.Row="2" HorizontalAlignment="Left" Margin="10">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="Auto"></ColumnDefinition>
                 <ColumnDefinition Width="Auto"></ColumnDefinition>
