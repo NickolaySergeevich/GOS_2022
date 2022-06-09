@@ -164,5 +164,16 @@ namespace GOS.WorkWithDB
 
             return answer;
         }
+
+        /// <summary>
+        /// Обновляет информацию о том, активирован ли пользователь или нет
+        /// </summary>
+        /// <param name="email">Почта пользователя</param>
+        public void UpdateActiveForUser(string email)
+        {
+            var query = $"UPDATE users SET Active = IF(Active, false, true) WHERE Email = '{email}'";
+            var command = new MySqlCommand(query, Instance._connection);
+            command.ExecuteNonQuery();
+        }
     }
 }
