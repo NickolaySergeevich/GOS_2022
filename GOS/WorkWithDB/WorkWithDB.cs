@@ -175,5 +175,15 @@ namespace GOS.WorkWithDB
             var command = new MySqlCommand(query, Instance._connection);
             command.ExecuteNonQuery();
         }
+
+        public void InsertUserIntoDb(string email, string firstName, string lastName, string officeName,
+            string birthdate, string password)
+        {
+            var query = "INSERT INTO users (RoleID, Email, Password, FirstName, LastName, OfficeID, Birthdate, Active) " +
+                        $"SELECT 1, '{email}', '{password}', '{firstName}', '{lastName}', offices.ID, '{birthdate}', 1 " +
+                        $"FROM offices WHERE offices.Title = '{officeName}'";
+            var command = new MySqlCommand(query, Instance._connection);
+            command.ExecuteNonQuery();
+        }
     }
 }
