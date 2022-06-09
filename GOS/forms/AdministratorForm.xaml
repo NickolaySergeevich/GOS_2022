@@ -98,7 +98,7 @@
                 <ColumnDefinition Width="Auto"></ColumnDefinition>
             </Grid.ColumnDefinitions>
 
-            <Button x:Name="button_changeRole" Content="Change Role" Padding="5" Margin="10"></Button>
+            <Button x:Name="button_changeRole" Content="Change Role" Padding="5" Margin="10" Click="Button_changeRole_OnClick"></Button>
             <Button x:Name="button_enableOrDisableLogin" Grid.Column="1" Content="Enable/Disable Login" Padding="5" Margin="10" Click="Button_enableOrDisableLogin_OnClick"></Button>
         </Grid>
     </Grid>

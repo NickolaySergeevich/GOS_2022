@@ -48,6 +48,16 @@ namespace GOS.Forms
         }
 
         /// <summary>
+        /// Перезагружает список пользователей после закрытия дополнительных диалоговых форм
+        /// </summary>
+        /// <param name="sender">Кто отправил сигнал</param>
+        /// <param name="e">Аргументы</param>
+        private void DialogFormClosed(object sender, System.EventArgs e)
+        {
+            ReloadListBoxUsers();
+        }
+
+        /// <summary>
         /// Показывает форму добавления пользователя
         /// </summary>
         /// <param name="sender">Кто отправил сигнал</param>
@@ -55,18 +65,8 @@ namespace GOS.Forms
         private void MenuItem_addUser_OnClick(object sender, RoutedEventArgs e)
         {
             var addUserForm = new AddUserForm();
-            addUserForm.Closed += AddUserForm_Closed;
+            addUserForm.Closed += DialogFormClosed;
             addUserForm.ShowDialog();
-        }
-
-        /// <summary>
-        /// Перезагружает список пользователей после закрытия формы добавления пользователей
-        /// </summary>
-        /// <param name="sender">Кто отправил сигнал</param>
-        /// <param name="e">Аргументы</param>
-        private void AddUserForm_Closed(object sender, System.EventArgs e)
-        {
-            ReloadListBoxUsers();
         }
 
         /// <summary>
@@ -89,6 +89,24 @@ namespace GOS.Forms
         private void ComboBox_offices_OnSelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             ReloadListBoxUsers();
+        }
+
+        /// <summary>
+        /// Открывает окно с формой редактирования пользователя
+        /// </summary>
+        /// <param name="sender">Кто отправил сигнал</param>
+        /// <param name="e">Аргументы</param>
+        private void Button_changeRole_OnClick(object sender, RoutedEventArgs e)
+        {
+            if (listBox_users.SelectedItem == null)
+            {
+                HelpMethods.ShowWarning("Вы не выбрали пользователя!");
+                return;
+            }
+
+            var editRoleForm = new EditRoleForm((UserItem)listBox_users.SelectedItem);
+            editRoleForm.Closed += DialogFormClosed;
+            editRoleForm.ShowDialog();
         }
 
         /// <summary>
