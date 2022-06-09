@@ -1,5 +1,7 @@
 ﻿using System.Windows;
 
+using GOS.WorkWithDB;
+
 namespace GOS.Forms
 {
     /// <summary>
@@ -8,11 +10,21 @@ namespace GOS.Forms
     public partial class UserForm
     {
         /// <summary>
+        /// Почта пользователя
+        /// </summary>
+        private readonly string _email;
+
+        /// <summary>
         /// Конструктор
         /// </summary>
-        public UserForm()
+        /// <param name="email">Почта пользователя</param>
+        public UserForm(string email)
         {
             InitializeComponent();
+
+            _email = email;
+
+            label_hello.Content = $"Hi, {WorkWithDb.Instance.GetNameUserByEmail(_email)}, Welcome to AMONIC Airlines";
         }
 
         /// <summary>
