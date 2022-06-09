@@ -101,7 +101,16 @@ namespace GOS.Forms
             }
             else
             {
-                // Тут будет открытие новой формы
+                if (answerFromDb[Constants.RoleIdKey] == Constants.RoleAdminId)
+                {
+                    var form = new AdministratorForm();
+                    form.Show();
+                    Close();
+                }
+                else if (answerFromDb[Constants.RoleIdKey] == Constants.RoleOfficeUserId)
+                {
+                    // Тут будет открытие формы пользователя
+                }
             }
         }
 
