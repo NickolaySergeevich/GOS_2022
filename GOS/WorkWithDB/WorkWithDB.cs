@@ -324,5 +324,27 @@ namespace GOS.WorkWithDB
                 return false;
             }
         }
+
+        /// <summary>
+        /// Получение времени пользователя в системе за последние 30 дней
+        /// </summary>
+        /// <param name="email">Почта пользователя</param>
+        /// <returns>Сумма времени за 30 дней</returns>
+        public long GetTotalTimeOnSystemByEmail(string email)
+        {
+            var query = "SELECT SUM(logs.TimeSpent) FROM logs " +
+                        $"LEFT JOIN users on users.Email = '{email}' " +
+                        "WHERE DATEDIFF(CURRENT_TIMESTAMP, logs.Date) <= 30 AND logs.UserID = users.ID";
+            var command = new MySqlCommand(query, Instance._connection);
+
+            using (var reader = command.ExecuteReader())
+            {
+                if (reader.HasRows == false)
+                    return 0;
+
+                reader.Read();
+                return reader.GetInt64(0);
+            }
+        }
     }
 }
