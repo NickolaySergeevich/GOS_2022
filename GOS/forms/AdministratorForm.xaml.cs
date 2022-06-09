@@ -1,4 +1,5 @@
 ﻿using System.Linq;
+using System.Windows.Controls;
 
 using GOS.WorkWithDB;
 
@@ -45,31 +46,49 @@ namespace GOS.Forms
     public partial class AdministratorForm
     {
         /// <summary>
-        /// Конструктор - здесь создается список пользователей и прикрепляется к <c>ListBox</c>
-        /// <br>Также создается список офисов</br>
+        /// Конструктор
+        /// <br>Создает список офисов</br>
         /// </summary>
         public AdministratorForm()
         {
             InitializeComponent();
 
-            var userItems = WorkWithDb.Instance.GetOfficeUsersForAdmin()
-                .Select(user => new UserItem
-                {
-                    Name = user["Name"],
-                    LastName = user["LastName"],
-                    Age = user["Age"],
-                    UserRole = user["UserRole"],
-                    EmailAddress = user["EmailAddress"],
-                    Office = user["Office"],
-                    BackColor = user["Active"] == "False" ? "Red" : "White"
-                })
-                .ToList();
-            listBox_users.ItemsSource = userItems;
-
             comboBox_offices.Items.Add("All offices");
             comboBox_offices.SelectedIndex = 0;
             foreach (var officeName in WorkWithDb.Instance.GetAllOfficesForAdmin())
                 comboBox_offices.Items.Add(officeName);
+        }
+
+        /// <summary>
+        /// Обновление списка пользователей при выборе нового офиса
+        /// </summary>
+        /// <param name="sender">Кто отправил сигнал</param>
+        /// <param name="e">Аргументы</param>
+        private void ComboBox_offices_OnSelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            ReloadListBoxUsers();
+        }
+
+        /// <summary>
+        /// Обновляет список пользователей
+        /// </summary>
+        private void ReloadListBoxUsers()
+        {
+            var usersData = WorkWithDb.Instance.GetOfficeUsersForAdmin(comboBox_offices.SelectedItem.ToString());
+            if (usersData == null)
+                return;
+            var usersItems = usersData.Select(user => new UserItem()
+            {
+                Name = user["Name"],
+                LastName = user["LastName"],
+                Age = user["Age"],
+                UserRole = user["UserRole"],
+                EmailAddress = user["EmailAddress"],
+                Office = user["Office"],
+                BackColor = user["Active"] == "False" ? "Red" : "White"
+            })
+                .ToList();
+            listBox_users.ItemsSource = usersItems;
         }
     }
 }

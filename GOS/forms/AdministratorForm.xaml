@@ -28,7 +28,7 @@
             </Grid.ColumnDefinitions>
 
             <Label x:Name="label_officeText" Content="Office:" HorizontalAlignment="Right" VerticalAlignment="Center"></Label>
-            <ComboBox x:Name="comboBox_offices" Grid.Column="1" HorizontalAlignment="Left" VerticalAlignment="Center" Width="256"></ComboBox>
+            <ComboBox x:Name="comboBox_offices" Grid.Column="1" HorizontalAlignment="Left" VerticalAlignment="Center" Width="256" SelectionChanged="ComboBox_offices_OnSelectionChanged"></ComboBox>
         </Grid>
 
         <Grid Grid.Row="2" DockPanel.Dock="Top" Height="30" Margin="13, 0" Background="Gray">
