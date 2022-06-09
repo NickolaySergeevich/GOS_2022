@@ -1,4 +1,5 @@
-﻿using System.Windows;
+﻿using System;
+using System.Windows;
 
 using GOS.WorkWithDB;
 
@@ -9,6 +10,10 @@ namespace GOS.Forms
     /// </summary>
     public partial class UserForm
     {
+        /// <summary>
+        /// Фиксация времени входа в систему
+        /// </summary>
+        private readonly DateTime _loginTime;
         /// <summary>
         /// Почта пользователя
         /// </summary>
@@ -23,6 +28,8 @@ namespace GOS.Forms
         public UserForm(string email)
         {
             InitializeComponent();
+
+            _loginTime = DateTime.Now;
 
             _email = email;
 
@@ -41,6 +48,16 @@ namespace GOS.Forms
             var authorizationForm = new AuthorizationForm();
             authorizationForm.Show();
             Close();
+        }
+
+        /// <summary>
+        /// Внесение логов при закрытии формы
+        /// </summary>
+        /// <param name="sender">Кто отправил сигнал</param>
+        /// <param name="e">Аргументы</param>
+        private void UserForm_OnClosed(object sender, EventArgs e)
+        {
+            WorkWithDb.Instance.InsertLogForUserByEmail(_loginTime, _email);
         }
     }
 }
