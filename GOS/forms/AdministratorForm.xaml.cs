@@ -89,8 +89,19 @@ namespace GOS.Forms
         /// <param name="e">Аргументы</param>
         private void MenuItem_addUser_OnClick(object sender, RoutedEventArgs e)
         {
-            var form = new AddUserForm();
-            form.ShowDialog();
+            var addUserForm = new AddUserForm();
+            addUserForm.Closed += AddUserForm_Closed;
+            addUserForm.ShowDialog();
+        }
+
+        /// <summary>
+        /// Перезагружает список пользователей после закрытия формы добавления пользователей
+        /// </summary>
+        /// <param name="sender">Кто отправил сигнал</param>
+        /// <param name="e">Аргументы</param>
+        private void AddUserForm_Closed(object sender, System.EventArgs e)
+        {
+            ReloadListBoxUsers();
         }
 
         /// <summary>
@@ -100,8 +111,8 @@ namespace GOS.Forms
         /// <param name="e">Аргументы</param>
         private void MenuItem_exit_OnClick(object sender, RoutedEventArgs e)
         {
-            var form = new AuthorizationForm();
-            form.Show();
+            var authorizationForm = new AuthorizationForm();
+            authorizationForm.Show();
             Close();
         }
 
