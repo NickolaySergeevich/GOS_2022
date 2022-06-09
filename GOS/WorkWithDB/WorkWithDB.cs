@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.IO;
 
 using MySql.Data.MySqlClient;
@@ -294,6 +295,31 @@ namespace GOS.WorkWithDB
             }
 
             return answer;
+        }
+
+        /// <summary>
+        /// Сохранение логов по выходу пользователя из системы
+        /// </summary>
+        /// <param name="loginTime">Время входа</param>
+        /// <param name="email">Почта пользователя</param>
+        /// <returns>Успешно ли</returns>
+        public bool InsertLogForUserByEmail(DateTime loginTime, string email)
+        {
+            try
+            {
+                var query =
+                    "INSERT INTO logs (UserID, LoginTime, LogoutTime, TimeSpent) " +
+                    $"SELECT users.ID, {loginTime}, CURRENT_TIMESTAMP, TIMESTAMPDIFF(second, {loginTime}, current_timestamp) " +
+                    $"FROM users WHERE users.Email = '{email}'";
+                var command = new MySqlCommand(query, Instance._connection);
+                command.ExecuteNonQuery();
+
+                return true;
+            }
+            catch (MySqlException)
+            {
+                return false;
+            }
         }
     }
 }
