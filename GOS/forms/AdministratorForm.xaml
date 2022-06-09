@@ -17,8 +17,8 @@
         </Grid.RowDefinitions>
 
         <Menu>
-            <MenuItem Header="Add user"></MenuItem>
-            <MenuItem Header="Exit" Click="MenuItem_OnClick"></MenuItem>
+            <MenuItem x:Name="menuItem_addUser" Header="Add user" Click="MenuItem_addUser_OnClick"></MenuItem>
+            <MenuItem x:Name="menuItem_exit" Header="Exit" Click="MenuItem_exit_OnClick"></MenuItem>
         </Menu>
 
         <Grid Grid.Row="1" Margin="10, 5">

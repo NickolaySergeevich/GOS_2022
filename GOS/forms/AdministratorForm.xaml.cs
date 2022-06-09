@@ -83,11 +83,22 @@ namespace GOS.Forms
         }
 
         /// <summary>
+        /// Показывает форму добавления пользователя
+        /// </summary>
+        /// <param name="sender">Кто отправил сигнал</param>
+        /// <param name="e">Аргументы</param>
+        private void MenuItem_addUser_OnClick(object sender, RoutedEventArgs e)
+        {
+            var form = new AddUserForm();
+            form.ShowDialog();
+        }
+
+        /// <summary>
         /// Возвращение к окну авторизации
         /// </summary>
         /// <param name="sender">Кто отправил сигнал</param>
         /// <param name="e">Аргументы</param>
-        private void MenuItem_OnClick(object sender, RoutedEventArgs e)
+        private void MenuItem_exit_OnClick(object sender, RoutedEventArgs e)
         {
             var form = new AuthorizationForm();
             form.Show();
