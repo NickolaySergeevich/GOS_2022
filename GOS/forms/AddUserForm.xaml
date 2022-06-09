@@ -49,8 +49,8 @@
                 <ColumnDefinition></ColumnDefinition>
             </Grid.ColumnDefinitions>
 
-            <Button x:Name="button_save" Content="Save" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="10" Padding="5" Width="80"></Button>
-            <Button x:Name="button_cancel" Grid.Column="1" Content="Cancel" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="10" Padding="5" Width="80"></Button>
+            <Button x:Name="button_save" Content="Save" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="10" Padding="5" Width="80" Click="Button_save_OnClick"></Button>
+            <Button x:Name="button_cancel" Grid.Column="1" Content="Cancel" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="10" Padding="5" Width="80" Click="Button_cancel_OnClick"></Button>
         </Grid>
     </Grid>
 </Window>
