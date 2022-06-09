@@ -13,7 +13,7 @@ namespace GOS
         /// <param name="warningText">Текст предупреждения</param>
         public static void ShowWarning(string warningText)
         {
-            var warningForm = new WarningForm { label_warningText = { Content = warningText } };
+            var warningForm = new MessageForm { label_warningText = { Content = warningText } };
             warningForm.ShowDialog();
         }
 
@@ -23,7 +23,7 @@ namespace GOS
         /// <param name="messageText">Текст сообщения</param>
         public static void ShowMessage(string messageText)
         {
-            var warningForm = new WarningForm { Title = "Сообщение", label_warningText = { Content = messageText } };
+            var warningForm = new MessageForm { Title = Constants.JustMessageTitle, label_warningText = { Content = messageText } };
             warningForm.ShowDialog();
         }
     }

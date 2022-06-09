@@ -112,8 +112,8 @@
     <Compile Include="Forms\EditRoleForm.xaml.cs">
       <DependentUpon>EditRoleForm.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Forms\WarningForm.xaml.cs">
-      <DependentUpon>WarningForm.xaml</DependentUpon>
+    <Compile Include="Forms\MessageForm.xaml.cs">
+      <DependentUpon>MessageForm.xaml</DependentUpon>
     </Compile>
     <Compile Include="HelpClasses.cs" />
     <Compile Include="HelpMethods.cs" />
@@ -169,7 +169,7 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Forms\WarningForm.xaml">
+    <Page Include="Forms\MessageForm.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

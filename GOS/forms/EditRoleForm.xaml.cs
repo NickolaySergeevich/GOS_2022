@@ -35,10 +35,10 @@ namespace GOS.Forms
             comboBox_offices.SelectedIndex = comboBox_offices.Items.IndexOf(user.Office);
             switch (user.UserRole)
             {
-                case "User":
+                case Constants.RoleUserText:
                     radioButton_user.IsChecked = true;
                     break;
-                case "Administrator":
+                case Constants.RoleAdminText:
                     radioButton_administrator.IsChecked = true;
                     break;
             }
@@ -54,25 +54,25 @@ namespace GOS.Forms
             if (string.IsNullOrEmpty(textBox_emailAddress.Text) || string.IsNullOrEmpty(textBox_firstName.Text) ||
                 string.IsNullOrEmpty(textBox_lastName.Text))
             {
-                HelpMethods.ShowWarning("Не все поля заполнены!");
+                HelpMethods.ShowWarning(Constants.WarningNoAllFieldsFill);
                 return;
             }
 
             var roleName = string.Empty;
             if (radioButton_user.IsChecked == true)
-                roleName = "User";
+                roleName = Constants.RoleUserText;
             else if (radioButton_administrator.IsChecked == true)
-                roleName = "Administrator";
+                roleName = Constants.RoleAdminText;
 
             if (WorkWithDb.Instance.UpdateUserInformation(textBox_emailAddress.Text, textBox_firstName.Text,
                     textBox_lastName.Text, comboBox_offices.SelectedItem.ToString(),
                     roleName, _user.EmailAddress))
             {
-                HelpMethods.ShowMessage("Данные успешно обновлены!");
+                HelpMethods.ShowMessage(Constants.MessageUserUpdateInDb);
                 _user.EmailAddress = textBox_emailAddress.Text;
             }
             else
-                HelpMethods.ShowWarning("Пользователь с такой почтой уже есть!");
+                HelpMethods.ShowWarning(Constants.WarningEmailExist);
         }
 
         /// <summary>

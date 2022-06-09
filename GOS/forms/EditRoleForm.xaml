@@ -6,7 +6,8 @@
         mc:Ignorable="d"
         Title="Edit Role" Height="250" Width="350"
         ResizeMode="NoResize"
-        WindowStartupLocation="CenterScreen">
+        WindowStartupLocation="CenterScreen"
+        Icon="{x:Null}">
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition></RowDefinition>

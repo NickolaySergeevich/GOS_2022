@@ -6,7 +6,8 @@
         mc:Ignorable="d"
         Title="AMONIC Airlines Automation System" Height="450" Width="800"
         ResizeMode="NoResize"
-        WindowStartupLocation="CenterScreen">
+        WindowStartupLocation="CenterScreen"
+        Icon="{x:Null}">
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto"></RowDefinition>

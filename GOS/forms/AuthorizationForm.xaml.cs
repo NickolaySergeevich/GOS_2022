@@ -68,14 +68,14 @@ namespace GOS.Forms
         {
             if (string.IsNullOrEmpty(textBox_email.Text) || string.IsNullOrEmpty(passwordBox_password.Password))
             {
-                HelpMethods.ShowWarning("Не заполнены поля для входа");
+                HelpMethods.ShowWarning(Constants.WarningNoAllFieldsFill);
                 return;
             }
 
             var answerFromDb = WorkWithDb.Instance.Login(textBox_email.Text, passwordBox_password.Password);
             if (answerFromDb == null)
             {
-                HelpMethods.ShowWarning("Такого пользователя нет в бд!");
+                HelpMethods.ShowWarning(Constants.WarningCantFindUserInDb);
 
                 ++_wrongTry;
                 if (_wrongTry < 3)
@@ -89,16 +89,7 @@ namespace GOS.Forms
                 _timer.Start();
             }
             else if (answerFromDb[Constants.ActiveKey] == Constants.ActiveNo)
-            {
-                var warningForm = new WarningForm
-                {
-                    label_warningText =
-                    {
-                        Content = "Вы неактивны в системе!"
-                    }
-                };
-                warningForm.ShowDialog();
-            }
+                HelpMethods.ShowWarning(Constants.WarningNoActiveUser);
             else
             {
                 if (answerFromDb[Constants.RoleIdKey] == Constants.RoleAdminId)

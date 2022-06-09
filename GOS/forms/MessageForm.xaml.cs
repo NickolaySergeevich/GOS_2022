@@ -6,12 +6,12 @@ namespace GOS.Forms
     /// Форма с предупреждением.
     /// Имеет публичный Label <c>label_warningText</c> - в него надо вносить сообщение.
     /// </summary>
-    public partial class WarningForm
+    public partial class MessageForm
     {
         /// <summary>
         /// Обычный конструктор
         /// </summary>
-        public WarningForm()
+        public MessageForm()
         {
             InitializeComponent();
         }

@@ -13,7 +13,7 @@ namespace GOS.Forms
     {
         /// <summary>
         /// Конструктор
-        /// <br>Создает список офисов</br>
+        /// <br>Создает список офисов в <c>ComboBox</c></br>
         /// </summary>
         public AdministratorForm()
         {
@@ -35,13 +35,13 @@ namespace GOS.Forms
                 return;
             var usersItems = usersData.Select(user => new UserItem()
             {
-                Name = user["Name"],
-                LastName = user["LastName"],
-                Age = user["Age"],
-                UserRole = user["UserRole"],
-                EmailAddress = user["EmailAddress"],
-                Office = user["Office"],
-                BackColor = user["Active"] == "False" ? "Red" : "White"
+                Name = user[Constants.NameKey],
+                LastName = user[Constants.LastNameKey],
+                Age = user[Constants.AgeKey],
+                UserRole = user[Constants.UserRoleKey],
+                EmailAddress = user[Constants.EmailAddressKey],
+                Office = user[Constants.OfficeKey],
+                BackColor = user[Constants.ActiveKey] == Constants.NoActiveUserAnswer ? Constants.NoActiveUserColor : Constants.ActiveUserColor
             })
                 .ToList();
             listBox_users.ItemsSource = usersItems;
@@ -100,7 +100,7 @@ namespace GOS.Forms
         {
             if (listBox_users.SelectedItem == null)
             {
-                HelpMethods.ShowWarning("Вы не выбрали пользователя!");
+                HelpMethods.ShowWarning(Constants.WarningNoSelectUser);
                 return;
             }
 
@@ -118,7 +118,7 @@ namespace GOS.Forms
         {
             if (listBox_users.SelectedItem == null)
             {
-                HelpMethods.ShowWarning("Вы не выбрали пользователя");
+                HelpMethods.ShowWarning(Constants.WarningNoSelectUser);
                 return;
             }
 

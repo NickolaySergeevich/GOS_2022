@@ -4,6 +4,9 @@ using GOS.WorkWithDB;
 
 namespace GOS.Forms
 {
+    /// <summary>
+    /// Класс формы добавления пользователя
+    /// </summary>
     public partial class AddUserForm
     {
         /// <summary>
@@ -21,6 +24,7 @@ namespace GOS.Forms
 
         /// <summary>
         /// Сохраняет пользователя в бд и очищает поля для ввода
+        /// <br>Или показывает ошибку</br>
         /// </summary>
         /// <param name="sender">Кто отправил сигнал</param>
         /// <param name="e">Аргументы</param>
@@ -30,7 +34,7 @@ namespace GOS.Forms
                 string.IsNullOrEmpty(textBox_lastName.Text) || string.IsNullOrEmpty(passwordBox_password.Password) ||
                 string.IsNullOrEmpty(datePicker_birthdate.Text))
             {
-                HelpMethods.ShowWarning("Не все поля заполнены!");
+                HelpMethods.ShowWarning(Constants.WarningNoAllFieldsFill);
                 return;
             }
 
@@ -46,10 +50,10 @@ namespace GOS.Forms
                 datePicker_birthdate.Text = string.Empty;
                 passwordBox_password.Password = string.Empty;
 
-                HelpMethods.ShowMessage("Пользователь успешно добавлен в бд!");
+                HelpMethods.ShowMessage(Constants.MessageUserInsertInDb);
             }
             else
-                HelpMethods.ShowWarning("Такой email уже есть в бд!");
+                HelpMethods.ShowWarning(Constants.WarningEmailExist);
         }
 
         /// <summary>
