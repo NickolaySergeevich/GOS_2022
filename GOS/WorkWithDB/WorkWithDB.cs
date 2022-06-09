@@ -236,5 +236,20 @@ namespace GOS.WorkWithDB
                 return false;
             }
         }
+
+        public string GetNameUserByEmail(string email)
+        {
+            var query = $"SELECT FirstName FROM users WHERE Email = '{email}'";
+            var command = new MySqlCommand(query, Instance._connection);
+
+            using (var reader = command.ExecuteReader())
+            {
+                if (reader.HasRows == false)
+                    return null;
+
+                reader.Read();
+                return reader.GetString(0);
+            }
+        }
     }
 }
