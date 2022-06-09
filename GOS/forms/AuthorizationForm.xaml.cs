@@ -92,15 +92,22 @@ namespace GOS.Forms
                 HelpMethods.ShowWarning(Constants.WarningNoActiveUser);
             else
             {
-                if (answerFromDb[Constants.RoleIdKey] == Constants.RoleAdminId)
+                switch (answerFromDb[Constants.RoleIdKey])
                 {
-                    var form = new AdministratorForm();
-                    form.Show();
-                    Close();
-                }
-                else if (answerFromDb[Constants.RoleIdKey] == Constants.RoleOfficeUserId)
-                {
-                    // Тут будет открытие формы пользователя
+                    case Constants.RoleAdminId:
+                        {
+                            var administratorForm = new AdministratorForm();
+                            administratorForm.Show();
+                            Close();
+                            break;
+                        }
+                    case Constants.RoleOfficeUserId:
+                        {
+                            var userForm = new UserForm(textBox_email.Text);
+                            userForm.Show();
+                            Close();
+                            break;
+                        }
                 }
             }
         }
