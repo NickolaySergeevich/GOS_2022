@@ -30,6 +30,77 @@
             <ComboBox x:Name="comboBox_offices" Grid.Column="1" HorizontalAlignment="Left" VerticalAlignment="Center" Width="256"></ComboBox>
         </Grid>
 
+        <Border Grid.Row="2" BorderThickness="1" BorderBrush="Black" Margin="10">
+            <ListBox x:Name="listBox_users" HorizontalContentAlignment="Stretch">
+                <ListBox.Template>
+                    <ControlTemplate>
+                        <DockPanel LastChildFill="True" VerticalAlignment="Top" Background="Gray">
+                            <Grid DockPanel.Dock="Top" Height="30">
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="1*"></ColumnDefinition>
+                                    <ColumnDefinition Width="1*"></ColumnDefinition>
+                                    <ColumnDefinition Width="1*"></ColumnDefinition>
+                                    <ColumnDefinition Width="1*"></ColumnDefinition>
+                                    <ColumnDefinition Width="3*"></ColumnDefinition>
+                                    <ColumnDefinition Width="1*"></ColumnDefinition>
+                                </Grid.ColumnDefinitions>
 
+                                <Label x:Name="label_columnNameText" Content="Name"></Label>
+                                <Label x:Name="label_columnLastNameText" Grid.Column="1" Content="Last Name"></Label>
+                                <Label x:Name="label_columnAgeText" Grid.Column="2" Content="Age"></Label>
+                                <Label x:Name="label_columnUserRoleText" Grid.Column="3" Content="User Role"></Label>
+                                <Label x:Name="label_columnEmailAddressText" Grid.Column="4" Content="Email Address"></Label>
+                                <Label x:Name="label_columnOfficeText" Grid.Column="5" Content="Office"></Label>
+
+                                <Border Grid.Column="0" BorderThickness="1" BorderBrush="Black"></Border>
+                                <Border Grid.Column="1" BorderThickness="1" BorderBrush="Black"></Border>
+                                <Border Grid.Column="2" BorderThickness="1" BorderBrush="Black"></Border>
+                                <Border Grid.Column="3" BorderThickness="1" BorderBrush="Black"></Border>
+                                <Border Grid.Column="4" BorderThickness="1" BorderBrush="Black"></Border>
+                                <Border Grid.Column="5" BorderThickness="1" BorderBrush="Black"></Border>
+                            </Grid>
+                        </DockPanel>
+                    </ControlTemplate>
+                </ListBox.Template>
+                <ListBox.ItemTemplate>
+                    <DataTemplate>
+                        <Grid>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="1*"></ColumnDefinition>
+                                <ColumnDefinition Width="1*"></ColumnDefinition>
+                                <ColumnDefinition Width="1*"></ColumnDefinition>
+                                <ColumnDefinition Width="1*"></ColumnDefinition>
+                                <ColumnDefinition Width="3*"></ColumnDefinition>
+                                <ColumnDefinition Width="1*"></ColumnDefinition>
+                            </Grid.ColumnDefinitions>
+
+                            <Label x:Name="label_name"></Label>
+                            <Label x:Name="label_lastName" Grid.Column="1"></Label>
+                            <Label x:Name="label_age" Grid.Column="2"></Label>
+                            <Label x:Name="label_userRole" Grid.Column="3"></Label>
+                            <Label x:Name="label_emailAddress" Grid.Column="4"></Label>
+                            <Label x:Name="label_Office" Grid.Column="5"></Label>
+
+                            <Border Grid.Column="0" BorderThickness="1" BorderBrush="Black"></Border>
+                            <Border Grid.Column="1" BorderThickness="1" BorderBrush="Black"></Border>
+                            <Border Grid.Column="2" BorderThickness="1" BorderBrush="Black"></Border>
+                            <Border Grid.Column="3" BorderThickness="1" BorderBrush="Black"></Border>
+                            <Border Grid.Column="4" BorderThickness="1" BorderBrush="Black"></Border>
+                            <Border Grid.Column="5" BorderThickness="1" BorderBrush="Black"></Border>
+                        </Grid>
+                    </DataTemplate>
+                </ListBox.ItemTemplate>
+            </ListBox>
+        </Border>
+
+        <Grid Grid.Row="3" HorizontalAlignment="Left">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="Auto"></ColumnDefinition>
+                <ColumnDefinition Width="Auto"></ColumnDefinition>
+            </Grid.ColumnDefinitions>
+
+            <Button x:Name="button_changeRole" Content="Change Role" Padding="5" Margin="10"></Button>
+            <Button x:Name="button_enableOrDisableLogin" Grid.Column="1" Content="Enable/Disable Login" Padding="5" Margin="10"></Button>
+        </Grid>
     </Grid>
 </Window>
