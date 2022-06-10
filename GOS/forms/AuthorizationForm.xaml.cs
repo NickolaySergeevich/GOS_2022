@@ -103,9 +103,20 @@ namespace GOS.Forms
                         }
                     case Constants.RoleOfficeUserId:
                         {
-                            var userForm = new UserForm(textBox_email.Text);
-                            userForm.Show();
-                            Close();
+                            var errorLog = WorkWithDb.Instance.GetErrorLogForUserByEmail(textBox_email.Text);
+                            if (errorLog == null)
+                            {
+                                var userForm = new UserForm(textBox_email.Text);
+                                userForm.Show();
+                                Close();
+                            }
+                            else
+                            {
+                                var noLogoutFrom = new NoLogoutForm(errorLog.LoginTime, textBox_email.Text);
+                                noLogoutFrom.Show();
+                                Close();
+                            }
+
                             break;
                         }
                 }

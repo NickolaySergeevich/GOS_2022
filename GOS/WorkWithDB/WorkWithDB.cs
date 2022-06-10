@@ -24,7 +24,7 @@ namespace GOS.WorkWithDB
         /// Файл настроек - указывать в первую очередь!
         /// <br>Да, прописывается прямо в классе</br>
         /// </summary>
-        private const string SettingsFile = "DatabaseSettings.dk";
+        private const string SettingsFile = "../../WorkWithDB/HelpFiles/DatabaseSettings.dk";
 
         /// <summary>
         /// Для реализации паттерна singleton
@@ -298,6 +298,65 @@ namespace GOS.WorkWithDB
         }
 
         /// <summary>
+        /// Находит лог пользователя по почте с неудачным выходом
+        /// </summary>
+        /// <param name="email">Почта пользователя</param>
+        /// <returns>Лог пользователя или null</returns>
+        public UserLog GetErrorLogForUserByEmail(string email)
+        {
+            var query = "SELECT Date, LoginTime, LogoutTime, TimeSpent, UnsuccessfulLogoutReason " +
+                        "FROM logs " +
+                        $"LEFT JOIN users ON users.Email = '{email}' " +
+                        "WHERE UserID = users.ID AND LogoutTime = '0001-01-01 00:00:00' AND UnsuccessfulLogoutReason = '-'";
+            var command = new MySqlCommand(query, Instance._connection);
+
+            using (var reader = command.ExecuteReader())
+            {
+                if (reader.HasRows == false)
+                    return null;
+
+                reader.Read();
+                return new UserLog
+                {
+                    Date = reader.GetDateTime(0),
+                    LoginTime = reader.GetDateTime(1),
+                    LogoutTime = reader.GetDateTime(2),
+                    TimeSpent = reader.GetString(3),
+                    UnsuccessfulLogoutReason = reader.GetString(4),
+                    BackColor = reader.GetString(4) == "-" ? "White" : "Red"
+                };
+            }
+        }
+
+        /// <summary>
+        /// Запись факта того, что пользователь вошёл
+        /// </summary>
+        /// <param name="loginTime">Время входа</param>
+        /// <param name="email">Почта пользователя</param>
+        /// <returns>Успешно ли</returns>
+        public bool InsertLoginTimeByEmail(DateTime loginTime, string email)
+        {
+            var correctLoginDate =
+                $"{loginTime.Year}-{loginTime.Month}-{loginTime.Day} {loginTime.Hour}:{loginTime.Minute}:{loginTime.Second}";
+
+            try
+            {
+                var query =
+                    "INSERT INTO logs (UserID, LoginTime) " +
+                    $"SELECT users.ID, '{correctLoginDate}' " +
+                    $"FROM users WHERE users.Email = '{email}'";
+                var command = new MySqlCommand(query, Instance._connection);
+                command.ExecuteNonQuery();
+
+                return true;
+            }
+            catch (MySqlException)
+            {
+                return false;
+            }
+        }
+
+        /// <summary>
         /// Сохранение логов по выходу пользователя из системы
         /// </summary>
         /// <param name="loginTime">Время входа</param>
@@ -310,11 +369,58 @@ namespace GOS.WorkWithDB
 
             try
             {
-                var query =
-                    "INSERT INTO logs (UserID, LoginTime, LogoutTime, TimeSpent) " +
-                    $"SELECT users.ID, '{correctLoginDate}', CURRENT_TIMESTAMP, TIMESTAMPDIFF(second, '{correctLoginDate}', current_timestamp) " +
-                    $"FROM users WHERE users.Email = '{email}'";
+                var query = "DELETE FROM logs " +
+                            "WHERE LogoutTime = '0001-01-01 00:00:00' " +
+                            "AND UnsuccessfulLogoutReason = '-' " +
+                            "AND UserID IN (SELECT * FROM (" +
+                            $"SELECT ID FROM users WHERE Email = '{email}' " +
+                            "ORDER BY ID LIMIT 1) AS UsersIds)";
                 var command = new MySqlCommand(query, Instance._connection);
+                command.ExecuteNonQuery();
+
+                query =
+                    "INSERT INTO logs (UserID, LoginTime, LogoutTime, TimeSpent) " +
+                    $"SELECT users.ID, '{correctLoginDate}', CURRENT_TIMESTAMP, TIMESTAMPDIFF(second, '{correctLoginDate}', CURRENT_TIMESTAMP) " +
+                    $"FROM users WHERE users.Email = '{email}'";
+                command = new MySqlCommand(query, Instance._connection);
+                command.ExecuteNonQuery();
+
+                return true;
+            }
+            catch (MySqlException)
+            {
+                return false;
+            }
+        }
+
+        /// <summary>
+        /// Сохранение лог с ошибкой для пользователя
+        /// </summary>
+        /// <param name="loginTime">Время входа</param>
+        /// <param name="email">Почта пользователя</param>
+        /// <param name="reasonText">Причина вылета</param>
+        /// <returns>Успешно ли</returns>
+        public bool InsertErrorLogForUserByEmail(DateTime loginTime, string email, string reasonText)
+        {
+            var correctLoginDate =
+                $"{loginTime.Year}-{loginTime.Month}-{loginTime.Day} {loginTime.Hour}:{loginTime.Minute}:{loginTime.Second}";
+
+            try
+            {
+                var query = "DELETE FROM logs " +
+                            "WHERE LogoutTime = '0001-01-01 00:00:00' " +
+                            "AND UnsuccessfulLogoutReason = '-' " +
+                            "AND UserID IN (SELECT * FROM (" +
+                            $"SELECT ID FROM users WHERE Email = '{email}' " +
+                            "ORDER BY ID LIMIT 1) AS UsersIds)";
+                var command = new MySqlCommand(query, Instance._connection);
+                command.ExecuteNonQuery();
+
+                query =
+                    "INSERT INTO logs (UserID, LoginTime, UnsuccessfulLogoutReason) " +
+                    $"SELECT users.ID, '{correctLoginDate}', '{reasonText}' " +
+                    $"FROM users WHERE users.Email = '{email}'";
+                command = new MySqlCommand(query, Instance._connection);
                 command.ExecuteNonQuery();
 
                 return true;
@@ -332,7 +438,7 @@ namespace GOS.WorkWithDB
         /// <returns>Сумма времени за 30 дней</returns>
         public long GetTotalTimeOnSystemByEmail(string email)
         {
-            var query = "SELECT SUM(logs.TimeSpent) FROM logs " +
+            var query = "SELECT IF(SUM(logs.TimeSpent) != 0, SUM(logs.TimeSpent), 0) FROM logs " +
                         $"LEFT JOIN users on users.Email = '{email}' " +
                         "WHERE DATEDIFF(CURRENT_TIMESTAMP, logs.Date) <= 30 AND logs.UserID = users.ID";
             var command = new MySqlCommand(query, Instance._connection);

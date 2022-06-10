@@ -115,6 +115,9 @@
     <Compile Include="Forms\MessageForm.xaml.cs">
       <DependentUpon>MessageForm.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Forms\NoLogoutForm.xaml.cs">
+      <DependentUpon>NoLogoutForm.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Forms\UserForm.xaml.cs">
       <DependentUpon>UserForm.xaml</DependentUpon>
     </Compile>
@@ -177,6 +180,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Forms\MessageForm.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Forms\NoLogoutForm.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

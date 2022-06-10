@@ -25,6 +25,7 @@ namespace GOS.Forms
         /// <br>Создает сообщение, приветствующее пользователя</br>
         /// <br>Заполняет таблицу логов</br>
         /// <br>Указывает время в системе (пока не тикает)</br>
+        /// <br>Создает запись в бд о том, что логин был совершен</br>
         /// </summary>
         /// <param name="email">Почта пользователя</param>
         public UserForm(string email)
@@ -39,9 +40,14 @@ namespace GOS.Forms
 
             var logs = WorkWithDb.Instance.GetLogsForUserByEmail(_email);
             listBox_logs.ItemsSource = logs;
-            label_numberOfCrushes.Content = logs.Count(elem => elem.UnsuccessfulLogoutReason != "-").ToString();
+            if (logs != null)
+                label_numberOfCrushes.Content = logs.Count(elem => elem.UnsuccessfulLogoutReason != "-").ToString();
+            else
+                label_numberOfCrushes.Content = 0;
 
             label_timeSpent.Content = TimeSpan.FromSeconds(WorkWithDb.Instance.GetTotalTimeOnSystemByEmail(_email)).ToString();
+
+            WorkWithDb.Instance.InsertLoginTimeByEmail(_loginTime, _email);
         }
 
         /// <summary>
