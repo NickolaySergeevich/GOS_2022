@@ -24,7 +24,7 @@ namespace GOS.WorkWithDB
         /// Файл настроек - указывать в первую очередь!
         /// <br>Да, прописывается прямо в классе</br>
         /// </summary>
-        private const string SettingsFile = "../../WorkWithDB/HelpFiles/DatabaseSettings.dk";
+        private const string SettingsFile = "../../WorkWithDB/HelpFiles/DatabaseSettings.dk";  // Необходимо менять при сборке установщика
 
         /// <summary>
         /// Для реализации паттерна singleton
