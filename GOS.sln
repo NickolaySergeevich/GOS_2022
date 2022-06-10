@@ -5,6 +5,8 @@ VisualStudioVersion = 17.2.32526.322
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GOS", "GOS\GOS.csproj", "{599C9A26-0ABD-4A66-9561-888827906194}"
 EndProject
+Project("{54435603-DBB4-11D2-8724-00A0C9A8B90C}") = "Installer", "Installer\Installer.vdproj", "{9CFEFAA8-B766-429A-B9B7-17B17488760C}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -15,6 +17,8 @@ Global
 		{599C9A26-0ABD-4A66-9561-888827906194}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{599C9A26-0ABD-4A66-9561-888827906194}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{599C9A26-0ABD-4A66-9561-888827906194}.Release|Any CPU.Build.0 = Release|Any CPU
+		{9CFEFAA8-B766-429A-B9B7-17B17488760C}.Debug|Any CPU.ActiveCfg = Debug
+		{9CFEFAA8-B766-429A-B9B7-17B17488760C}.Release|Any CPU.ActiveCfg = Release
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

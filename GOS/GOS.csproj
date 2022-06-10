@@ -148,8 +148,12 @@
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
     </None>
-    <None Include="WorkWithDB\HelpFiles\DatabaseSettings.dk" />
-    <None Include="WorkWithDB\HelpFiles\DatabaseSettings.dk.help" />
+    <Resource Include="WorkWithDB\HelpFiles\DatabaseSettings.dk">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="WorkWithDB\HelpFiles\DatabaseSettings.dk.help">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Resource>
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
